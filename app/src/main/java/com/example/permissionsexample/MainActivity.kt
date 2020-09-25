@@ -16,11 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         btnCameraPermission.setOnClickListener{
             val a : String = Manifest.permission.CAMERA
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "You already have the permission for the camera.", Toast.LENGTH_LONG).show()
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "You already have the permission for the camera and GPS.", Toast.LENGTH_LONG).show()
             } else {
                 // Request Permission
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION), CAMERA_AND_FINE_LOCATION_PERMISSION)
             }
         }
     }
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1
-//        private const val FINE_LOCATION_PERMISSION_CODE = 2
+        private const val FINE_LOCATION_PERMISSION_CODE = 2
+        private const val CAMERA_AND_FINE_LOCATION_PERMISSION = 12
     }
 }
